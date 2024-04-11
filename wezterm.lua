@@ -159,9 +159,11 @@ config.font = wezterm.font_with_fallback {
 --   on other systems the Alt or Meta key.
 config.keys = {
   -- ⌘+k, ⇧+⌘+k same as iTerm2
-  {key = 'k', mods = 'CMD', action = wezterm.action.ClearScrollback 'ScrollbackAndViewport',},
-  {key = 'K', mods = 'CMD', action = wezterm.action.ClearScrollback 'ScrollbackOnly',},
-  {key = 'w', mods = 'CMD', action = wezterm.action.CloseCurrentPane { confirm = true },},
+  {key = 'k', mods = 'CMD', action = wezterm.action.ClearScrollback 'ScrollbackAndViewport'},
+  {key = 'K', mods = 'CMD', action = wezterm.action.ClearScrollback 'ScrollbackOnly'},
+  {key = 'w', mods = 'CMD', action = wezterm.action.CloseCurrentPane { confirm = true }},
+  {key = 'd', mods = 'CMD', action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' }},
+  {key = 'D', mods = 'CMD', action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' }},
 }
 
 

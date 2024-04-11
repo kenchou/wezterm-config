@@ -151,19 +151,25 @@ config.font = wezterm.font_with_fallback {
 
 -- hotkey
 -- SUPER, CMD, WIN - these are all equivalent:
---   on macOS the Command key,
+--   on macOS the Command key (⌘),
 --   on Windows the Windows key,
 --   on Linux this can also be the Super or Hyper key.
 -- ALT, OPT, META - these are all equivalent:
---   on macOS the Option key,
+--   on macOS the Option key (⌥),
 --   on other systems the Alt or Meta key.
 config.keys = {
-  -- ⌘+k, ⇧+⌘+k same as iTerm2
+  -- Configure the same hotkeys as in iTerm2
+  -- ⌘+k, ⌘+⇧+k clean scrollback
   {key = 'k', mods = 'CMD', action = wezterm.action.ClearScrollback 'ScrollbackAndViewport'},
   {key = 'K', mods = 'CMD', action = wezterm.action.ClearScrollback 'ScrollbackOnly'},
+  -- ⌘+w clone current pane
   {key = 'w', mods = 'CMD', action = wezterm.action.CloseCurrentPane { confirm = true }},
+  -- ⌘+d, ⌘+⇧+d split pane
   {key = 'd', mods = 'CMD', action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' }},
   {key = 'D', mods = 'CMD', action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' }},
+  -- ⌘+⌃+f toggle fullscreen
+  {key = 'f', mods = 'CMD|CTRL', action = wezterm.action.ToggleFullScreen},
+  -- End of iTerm2 keys map
 }
 
 

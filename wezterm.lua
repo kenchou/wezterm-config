@@ -152,8 +152,9 @@ config.font = wezterm.font_with_fallback {
 -- hotkey
 config.keys = {
   -- ⌘+k, ⇧+⌘+k same as iTerm2
-  {key = 'k', mods = 'SUPER', action = wezterm.action{ClearScrollback="ScrollbackAndViewport"},},
-  {key = 'K', mods = 'SUPER', action = wezterm.action{ClearScrollback="ScrollbackOnly"},},
+  {key = 'k', mods = 'SUPER', action = wezterm.action.ClearScrollback 'ScrollbackAndViewport',},
+  {key = 'K', mods = 'SUPER', action = wezterm.action.ClearScrollback 'ScrollbackOnly',},
+  {key = 'w', mods = 'SUPER', action = wezterm.action.CloseCurrentPane { confirm = true },},
 }
 
 

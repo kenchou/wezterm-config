@@ -150,11 +150,18 @@ config.font = wezterm.font_with_fallback {
 -- config.show_new_tab_button_in_tab_bar = true
 
 -- hotkey
+-- SUPER, CMD, WIN - these are all equivalent:
+--   on macOS the Command key,
+--   on Windows the Windows key,
+--   on Linux this can also be the Super or Hyper key.
+-- ALT, OPT, META - these are all equivalent:
+--   on macOS the Option key,
+--   on other systems the Alt or Meta key.
 config.keys = {
   -- ⌘+k, ⇧+⌘+k same as iTerm2
-  {key = 'k', mods = 'SUPER', action = wezterm.action.ClearScrollback 'ScrollbackAndViewport',},
-  {key = 'K', mods = 'SUPER', action = wezterm.action.ClearScrollback 'ScrollbackOnly',},
-  {key = 'w', mods = 'SUPER', action = wezterm.action.CloseCurrentPane { confirm = true },},
+  {key = 'k', mods = 'CMD', action = wezterm.action.ClearScrollback 'ScrollbackAndViewport',},
+  {key = 'K', mods = 'CMD', action = wezterm.action.ClearScrollback 'ScrollbackOnly',},
+  {key = 'w', mods = 'CMD', action = wezterm.action.CloseCurrentPane { confirm = true },},
 }
 
 

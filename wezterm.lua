@@ -79,8 +79,8 @@ local process_icons = {
   ['zsh'] = wezterm.nerdfonts.dev_terminal,
 }
 local function get_process_icon(tab)
-  local process_name = tab.active_pane.foreground_process_name:match("([^/\\]+)%.exe$") or
-      tab.active_pane.foreground_process_name:match("([^/\\]+)$")
+  local process_name = tab.active_pane.foreground_process_name
+  process_name = process_name:match("([^/\\]+)%.exe$") or process_name:match("([^/\\]+)$") or process_name
   process_name = process_name:match("(python)[%d%.]*$") or process_name
   -- print(process_name .. ' <-- ' .. tab.active_pane.foreground_process_name)
   -- local icon = process_icons[process_name] or string.format('[%s]', process_name)
@@ -126,6 +126,10 @@ wezterm.on('update-right-status', function(window, pane)
   })
 end)
 
+-- wezterm.on('gui-startup', function()
+--  local tab, pane, window = wezterm.mux.spawn_window({})
+--  window:gui_window():maximize()
+-- end)
 
 -- This will hold the configuration.
 local config = wezterm.config_builder()
@@ -134,8 +138,10 @@ local config = wezterm.config_builder()
 config.initial_cols = 140
 config.initial_rows = 42
 config.window_background_opacity = 0.9
+-- disable title bar. 更美观的极简风
+config.window_decorations = "RESIZE|INTEGRATED_BUTTONS"
 
--- Color scheme:
+-- Color scheme: Dark+, Hardcore
 config.color_scheme = 'Dark+'
 
 -- Fonts
@@ -144,6 +150,11 @@ config.font = wezterm.font_with_fallback {
   'SauceCodePro Nerd Font',
   'JetBrains Mono',
   'Hack Nerd Font',
+}
+
+config.inactive_pane_hsb = {
+ saturation = 0.8,
+ brightness = 0.6,
 }
 
 -- config.use_fancy_tab_bar = true
@@ -169,9 +180,11 @@ config.keys = {
   {key = 'D', mods = 'CMD', action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' }},
   -- ⌘+⌃+f toggle fullscreen
   {key = 'f', mods = 'CMD|CTRL', action = wezterm.action.ToggleFullScreen},
+  -- ⌘+[Home]/[End] scroll to top/bottom
+  {key = 'Home', mods = 'CMD|CTRL', action = wezterm.action.ScrollToTop},
+  {key = 'End', mods = 'CMD|CTRL', action = wezterm.action.ScrollToBottom},
   -- End of iTerm2 keys map
 }
-
 
 -- and finally, return the configuration to wezterm
 return config

@@ -142,7 +142,7 @@ config.window_background_opacity = 0.9
 config.window_decorations = "RESIZE|INTEGRATED_BUTTONS"
 
 -- Color scheme: Dark+, Hardcore
-config.color_scheme = 'Dark+'
+config.color_scheme = 'Galaxy'
 
 -- Fonts
 -- config.font_size = 12

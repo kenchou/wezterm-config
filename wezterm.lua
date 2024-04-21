@@ -157,6 +157,8 @@ config.inactive_pane_hsb = {
  brightness = 0.6,
 }
 
+config.enable_scroll_bar = true
+
 -- config.use_fancy_tab_bar = true
 -- config.show_new_tab_button_in_tab_bar = true
 

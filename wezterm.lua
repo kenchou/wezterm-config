@@ -19,8 +19,8 @@ end
 
 function pad_title(tab_title, min_width)
     local length = #tab_title
-    if length < min_width then
-        local pad = (min_width - length) // 2
+    local pad = (min_width - length) // 2
+    if pad > 0 then
         local format_str = string.format("%%%ds%%s%%%ds", pad, pad)
         return string.format(format_str, "", tab_title, "")
     else
@@ -78,6 +78,7 @@ local process_icons = {
   ['wget'] = wezterm.nerdfonts.md_download_box,
   ['zsh'] = wezterm.nerdfonts.dev_terminal,
 }
+
 local function get_process_icon(tab)
   local process_name = tab.active_pane.foreground_process_name
   process_name = process_name:match("([^/\\]+)%.exe$") or process_name:match("([^/\\]+)$") or process_name

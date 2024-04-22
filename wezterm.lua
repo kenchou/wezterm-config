@@ -18,14 +18,14 @@ function tab_title(tab_info)
 end
 
 function pad_title(tab_title, min_width)
-    local length = #tab_title
-    local pad = (min_width - length) // 2
-    if pad > 0 then
-        local format_str = string.format("%%%ds%%s%%%ds", pad, pad)
-        return string.format(format_str, "", tab_title, "")
-    else
-        return tab_title
-    end
+  local length = #tab_title
+  local pad = (min_width - length) // 2
+  if pad > 0 then
+    local format_str = string.format("%%%ds%%s%%%ds", pad, pad)
+    return string.format(format_str, "", tab_title, "")
+  else
+    return tab_title
+  end
 end
 
 -- Common Process Icons
@@ -83,8 +83,6 @@ local function get_process_icon(tab)
   local process_name = tab.active_pane.foreground_process_name
   process_name = process_name:match("([^/\\]+)%.exe$") or process_name:match("([^/\\]+)$") or process_name
   process_name = process_name:match("(python)[%d%.]*$") or process_name
-  -- print(process_name .. ' <-- ' .. tab.active_pane.foreground_process_name)
-  -- local icon = process_icons[process_name] or string.format('[%s]', process_name)
   local icon = process_icons[process_name] or wezterm.nerdfonts.seti_checkbox_unchecked
 
   return icon
@@ -187,6 +185,28 @@ config.keys = {
   {key = 'Home', mods = 'CMD|CTRL', action = wezterm.action.ScrollToTop},
   {key = 'End', mods = 'CMD|CTRL', action = wezterm.action.ScrollToBottom},
   -- End of iTerm2 keys map
+}
+
+config.mouse_bindings = {
+  -- like iTerm2: 禁用单击打开链接，使用 CTRL+Click 打开
+  -- Disable the default click behavior
+  {
+    event = { Up = { streak = 1, button = "Left"} },
+    mods = "NONE",
+    action = wezterm.action.DisableDefaultAssignment,
+  },
+  -- Bind 'Up' event of CTRL-Click to open hyperlinks
+  {
+    event = { Up = { streak = 1, button = 'Left' } },
+    mods = 'CTRL',
+    action = wezterm.action.OpenLinkAtMouseCursor,
+  },
+  -- Disable the 'Down' event of CTRL-Click to avoid weird program behaviors
+  {
+    event = { Down = { streak = 1, button = 'Left' } },
+    mods = 'CTRL',
+    action = wezterm.action.Nop,
+  },
 }
 
 -- and finally, return the configuration to wezterm

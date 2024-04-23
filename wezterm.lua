@@ -148,6 +148,7 @@ config.color_scheme = 'Galaxy'
 config.font = wezterm.font_with_fallback {
   'SauceCodePro Nerd Font',
   'JetBrains Mono',
+  'Heiti SC',
   'Hack Nerd Font',
 }
 

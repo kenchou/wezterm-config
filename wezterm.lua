@@ -125,6 +125,7 @@ wezterm.on('update-right-status', function(window, pane)
   })
 end)
 
+
 -- wezterm.on('gui-startup', function()
 --  local tab, pane, window = wezterm.mux.spawn_window({})
 --  window:gui_window():maximize()
@@ -137,11 +138,32 @@ local config = wezterm.config_builder()
 config.initial_cols = 140
 config.initial_rows = 42
 config.window_background_opacity = 0.9
+config.macos_window_background_blur = 6
+
 -- disable title bar. 更美观的极简风
 config.window_decorations = "RESIZE|INTEGRATED_BUTTONS"
 
--- Color scheme: Dark+, Hardcore
-config.color_scheme = 'Galaxy'
+-- config.use_fancy_tab_bar = true
+-- config.show_new_tab_button_in_tab_bar = true
+config.enable_scroll_bar = true
+
+-- The color scheme you want to use
+-- Color scheme: Dark+, Hardcore, Catppuccin Mocha, Galaxy
+local scheme = 'Dark+'
+
+config.color_scheme = scheme
+
+-- Obtain the definition of that color scheme
+local scheme_def = wezterm.color.get_builtin_schemes()[scheme]
+
+config.colors = {
+  tab_bar = {
+    active_tab = {
+      bg_color = scheme_def.background,
+      fg_color = scheme_def.foreground,
+    }
+  }
+}
 
 -- Fonts
 -- config.font_size = 12
@@ -153,14 +175,9 @@ config.font = wezterm.font_with_fallback {
 }
 
 config.inactive_pane_hsb = {
- saturation = 0.8,
- brightness = 0.6,
+  saturation = 0.8,
+  brightness = 0.6,
 }
-
-config.enable_scroll_bar = true
-
--- config.use_fancy_tab_bar = true
--- config.show_new_tab_button_in_tab_bar = true
 
 -- hotkey
 -- SUPER, CMD, WIN - these are all equivalent:
@@ -173,19 +190,23 @@ config.enable_scroll_bar = true
 config.keys = {
   -- Configure the same hotkeys as in iTerm2
   -- ⌘+k, ⌘+⇧+k clean scrollback
-  {key = 'k', mods = 'CMD', action = wezterm.action.ClearScrollback 'ScrollbackAndViewport'},
-  {key = 'K', mods = 'CMD', action = wezterm.action.ClearScrollback 'ScrollbackOnly'},
+  { key = 'k', mods = 'CMD', action = wezterm.action.ClearScrollback 'ScrollbackAndViewport' },
+  { key = 'K', mods = 'CMD|SHIFT', action = wezterm.action.ClearScrollback 'ScrollbackOnly' },
   -- ⌘+w clone current pane
-  {key = 'w', mods = 'CMD', action = wezterm.action.CloseCurrentPane { confirm = true }},
+  { key = 'w', mods = 'CMD', action = wezterm.action.CloseCurrentPane { confirm = true }},
   -- ⌘+d, ⌘+⇧+d split pane
-  {key = 'd', mods = 'CMD', action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' }},
-  {key = 'D', mods = 'CMD', action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' }},
+  { key = 'd', mods = 'CMD', action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' }},
+  { key = 'D', mods = 'CMD|SHIFT', action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' }},
   -- ⌘+⌃+f toggle fullscreen
-  {key = 'f', mods = 'CMD|CTRL', action = wezterm.action.ToggleFullScreen},
+  { key = 'f', mods = 'CMD|CTRL', action = wezterm.action.ToggleFullScreen },
   -- ⌘+[Home]/[End] scroll to top/bottom
-  {key = 'Home', mods = 'CMD|CTRL', action = wezterm.action.ScrollToTop},
-  {key = 'End', mods = 'CMD|CTRL', action = wezterm.action.ScrollToBottom},
+  { key = 'Home', mods = 'CMD|CTRL', action = wezterm.action.ScrollToTop },
+  { key = 'End', mods = 'CMD|CTRL', action = wezterm.action.ScrollToBottom },
+  -- ^+w 搜索模式快速删除搜索词
+  { key = 'Backspace', mods = 'ALT', action = wezterm.action.CopyMode 'ClearPattern' },
   -- End of iTerm2 keys map
+  -- ^+⇧+h
+  { key = 'H', mods = 'CTRL|SHIFT', action = wezterm.action.Search { Regex = '\\b[a-f0-9]{6,}\\b' }},
 }
 
 config.mouse_bindings = {

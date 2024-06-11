@@ -173,8 +173,21 @@ config.colors = {
       -- fg_color = scheme_def.foreground,
       bg_color = '#ffffff',
       fg_color = '#000000',
-    }
+    },
+    -- The color of the inactive tab bar edge/divider
+    inactive_tab_edge = '#575757',
   },
+}
+
+-- Native (Fancy) Tab Bar appearance
+config.window_frame = {
+  -- The size of the font in the tab bar.
+  -- Default to 10.0 on Windows but 12.0 on other systems
+  font_size = 12.5,
+
+  -- The overall background color of the tab bar when
+  -- the window is focused
+  active_titlebar_bg = '#333333',
 }
 
 -- Fonts

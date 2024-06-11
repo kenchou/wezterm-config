@@ -146,6 +146,7 @@ config.window_decorations = "RESIZE|INTEGRATED_BUTTONS"
 -- config.use_fancy_tab_bar = true
 -- config.show_new_tab_button_in_tab_bar = true
 config.enable_scroll_bar = true
+config.min_scroll_bar_height = "2cell"
 
 -- The color scheme you want to use
 -- Color scheme: Dark+, Hardcore, Catppuccin Mocha, Galaxy
@@ -157,18 +158,30 @@ config.color_scheme = scheme
 local scheme_def = wezterm.color.get_builtin_schemes()[scheme]
 
 config.colors = {
+  -- Since: 20220319-142410-0fcdea07
+  -- When the IME, a dead key or a leader key are being processed and are effectively
+  -- holding input pending the result of input composition, change the cursor
+  -- to this color to give a visual cue about the compose state.
+  compose_cursor = 'orange',
+  -- The color of the scrollbar "thumb"; the portion that represents the current viewport
+  scrollbar_thumb = scheme_def.foreground,
+  -- The color of the split lines between panes
+  split = '#666666',
   tab_bar = {
     active_tab = {
-      bg_color = scheme_def.background,
-      fg_color = scheme_def.foreground,
+      -- bg_color = scheme_def.background,
+      -- fg_color = scheme_def.foreground,
+      bg_color = '#ffffff',
+      fg_color = '#000000',
     }
-  }
+  },
 }
 
 -- Fonts
 -- config.font_size = 12
 config.font = wezterm.font_with_fallback {
   'SauceCodePro Nerd Font',
+  'NotoSans Nerd Font',
   'JetBrains Mono',
   'Heiti SC',
   'Hack Nerd Font',

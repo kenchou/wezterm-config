@@ -194,10 +194,10 @@ config.window_frame = {
 -- config.font_size = 12
 config.font = wezterm.font_with_fallback {
   'SauceCodePro Nerd Font',
+  'Noto Sans CJK SC',
   'NotoSans Nerd Font',
   'JetBrains Mono',
   'Heiti SC',
-  'Hack Nerd Font',
 }
 
 config.inactive_pane_hsb = {
@@ -215,24 +215,44 @@ config.inactive_pane_hsb = {
 --   on other systems the Alt or Meta key.
 config.keys = {
   -- Configure the same hotkeys as in iTerm2
-  -- ⌘+k, ⌘+⇧+k clean scrollback
+  -- 模拟 iTerm2 的按键
+  -- ⌘+k, ⌘+⇧+K clean scrollback
+  -- 清屏
   { key = 'k', mods = 'CMD', action = wezterm.action.ClearScrollback 'ScrollbackAndViewport' },
   { key = 'K', mods = 'CMD|SHIFT', action = wezterm.action.ClearScrollback 'ScrollbackOnly' },
-  -- ⌘+w clone current pane
+  -- ⌘+w close current pane
+  -- 关闭窗格
   { key = 'w', mods = 'CMD', action = wezterm.action.CloseCurrentPane { confirm = true }},
-  -- ⌘+d, ⌘+⇧+d split pane
+  -- ⌘+d, ⌘+⇧+D split pane
+  -- 水平/垂直分割窗格
   { key = 'd', mods = 'CMD', action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' }},
   { key = 'D', mods = 'CMD|SHIFT', action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' }},
   -- ⌘+⌃+f toggle fullscreen
+  -- 全屏模式
   { key = 'f', mods = 'CMD|CTRL', action = wezterm.action.ToggleFullScreen },
   -- ⌘+[Home]/[End] scroll to top/bottom
-  { key = 'Home', mods = 'CMD|CTRL', action = wezterm.action.ScrollToTop },
-  { key = 'End', mods = 'CMD|CTRL', action = wezterm.action.ScrollToBottom },
-  -- ^+w 搜索模式快速删除搜索词
-  { key = 'Backspace', mods = 'ALT', action = wezterm.action.CopyMode 'ClearPattern' },
+  -- 翻到第一屏，最后一屏
+  { key = 'Home', mods = 'CMD', action = wezterm.action.ScrollToTop },
+  { key = 'End', mods = 'CMD', action = wezterm.action.ScrollToBottom },
+  -- ⌘+[PageUp]/[PageDown] 向上/向下翻一屏
+  { key = 'PageUp', mods = 'CMD', action = wezterm.action.ScrollByPage(-1) },
+  { key = 'PageDown', mods = 'CMD', action = wezterm.action.ScrollByPage(1) },
   -- End of iTerm2 keys map
-  -- ^+⇧+h
+  -- Feature of wezterm
+  -- 特有功能
+  -- ⇧+↑/⇧+↓ scrolling to the start of a Prompt zone
+  -- 跳到上一个/下一个命令提示符
+  { key = 'UpArrow', mods = 'SHIFT', action = wezterm.action.ScrollToPrompt(-1) },
+  { key = 'DownArrow', mods = 'SHIFT', action = wezterm.action.ScrollToPrompt(1) },
+  -- ^+w clear pattern in search mode
+  -- 搜索模式快速删除搜索词
+  { key = 'Backspace', mods = 'ALT', action = wezterm.action.CopyMode 'ClearPattern' },
+  -- ^+⇧+h quick search hash
+  -- 快速搜索 hash
   { key = 'H', mods = 'CTRL|SHIFT', action = wezterm.action.Search { Regex = '\\b[a-f0-9]{6,}\\b' }},
+  -- set ⌘+⇧+F to quick select mode (⌘+f search mode is default)
+  -- 快速选择模式，按一些日常常用的模式（日期，URL等）快速选择复制
+  { key = 'F', mods = 'CMD|SHIFT', action = wezterm.action.QuickSelect },
 }
 
 config.mouse_bindings = {
@@ -257,5 +277,6 @@ config.mouse_bindings = {
   },
 }
 
+-- config.debug_key_events = true
 -- and finally, return the configuration to wezterm
 return config

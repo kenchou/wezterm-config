@@ -213,49 +213,39 @@ config.inactive_pane_hsb = {
 -- ALT, OPT, META - these are all equivalent:
 --   on macOS the Option key (⌥),
 --   on other systems the Alt or Meta key.
+local act = wezterm.action
 config.keys = {
-  -- Configure the same hotkeys as in iTerm2
-  -- 模拟 iTerm2 的按键
-  -- ⌘+k, ⌘+⇧+K clean scrollback
-  -- 清屏
-  { key = 'k', mods = 'CMD', action = wezterm.action.ClearScrollback 'ScrollbackAndViewport' },
-  { key = 'K', mods = 'CMD|SHIFT', action = wezterm.action.ClearScrollback 'ScrollbackOnly' },
-  -- ⌘+w close current pane
-  -- 关闭窗格
-  { key = 'w', mods = 'CMD', action = wezterm.action.CloseCurrentPane { confirm = true }},
-  -- ⌘+d, ⌘+⇧+D split pane
-  -- 水平/垂直分割窗格
-  { key = 'd', mods = 'CMD', action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' }},
-  { key = 'D', mods = 'CMD|SHIFT', action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' }},
-  -- ⌘+⌃+f toggle fullscreen
-  -- 全屏模式
-  { key = 'f', mods = 'CMD|CTRL', action = wezterm.action.ToggleFullScreen },
-  -- ⌘+[Home]/[End] scroll to top/bottom
-  -- 翻到第一屏，最后一屏
-  { key = 'Home', mods = 'CMD', action = wezterm.action.ScrollToTop },
-  { key = 'End', mods = 'CMD', action = wezterm.action.ScrollToBottom },
+  -- Configure the same hotkeys as in iTerm2. -- 模拟 iTerm2 的按键
+  -- ⌘+k, ⌘+⇧+K clean scrollback -- 清屏
+  { key = 'k', mods = 'CMD', action = act.ClearScrollback 'ScrollbackAndViewport' },
+  { key = 'K', mods = 'CMD|SHIFT', action = act.ClearScrollback 'ScrollbackOnly' },
+  -- ⌘+w close current pane -- 关闭窗格
+  { key = 'w', mods = 'CMD', action = act.CloseCurrentPane { confirm = true }},
+  -- ⌘+d, ⌘+⇧+D split pane -- 水平/垂直分割窗格
+  { key = 'd', mods = 'CMD', action = act.SplitHorizontal { domain = 'CurrentPaneDomain' }},
+  { key = 'D', mods = 'CMD|SHIFT', action = act.SplitVertical { domain = 'CurrentPaneDomain' }},
+  -- ⌘+⌃+f toggle fullscreen -- 全屏模式
+  { key = 'f', mods = 'CMD|CTRL', action = act.ToggleFullScreen },
+  -- ⌘+[Home]/[End] scroll to top/bottom -- 翻到第一屏，最后一屏
+  { key = 'Home', mods = 'CMD', action = act.ScrollToTop },
+  { key = 'End', mods = 'CMD', action = act.ScrollToBottom },
   -- ⌘+[PageUp]/[PageDown] 向上/向下翻一屏
-  { key = 'PageUp', mods = 'CMD', action = wezterm.action.ScrollByPage(-1) },
-  { key = 'PageDown', mods = 'CMD', action = wezterm.action.ScrollByPage(1) },
+  { key = 'PageUp', mods = 'CMD', action = act.ScrollByPage(-1) },
+  { key = 'PageDown', mods = 'CMD', action = act.ScrollByPage(1) },
   -- End of iTerm2 keys map
-  -- Feature of wezterm
-  -- 特有功能
-  -- ⇧+↑/⇧+↓ scrolling to the start of a Prompt zone
-  -- 跳到上一个/下一个命令提示符
-  { key = 'UpArrow', mods = 'CMD', action = wezterm.action.ScrollToPrompt(-1) },
-  { key = 'DownArrow', mods = 'CMD', action = wezterm.action.ScrollToPrompt(1) },
-  -- 按行滚动
-  { key = 'UpArrow', mods = 'CMD|SHIFT', action = wezterm.action.ScrollByLine(-1) },
-  { key = 'DownArrow', mods = 'CMD|SHIFT', action = wezterm.action.ScrollByLine(1) },
-  -- ^+w clear pattern in search mode
-  -- 搜索模式快速删除搜索词
-  { key = 'Backspace', mods = 'ALT', action = wezterm.action.CopyMode 'ClearPattern' },
-  -- ^+⇧+h quick search hash
-  -- 快速搜索 hash
-  { key = 'H', mods = 'CTRL|SHIFT', action = wezterm.action.Search { Regex = '\\b[a-f0-9]{6,}\\b' }},
-  -- set ⌘+⇧+F to quick select mode (⌘+f search mode is default)
-  -- 快速选择模式，按一些日常常用的模式（日期，URL等）快速选择复制
-  { key = 'F', mods = 'CMD|SHIFT', action = wezterm.action.QuickSelect },
+  -- Feature of wezterm -- 特有功能
+  -- ⇧+↑/⇧+↓ scrolling to the start of a Prompt zone -- 跳到上一个/下一个命令提示符
+  { key = 'UpArrow', mods = 'CMD', action = act.ScrollToPrompt(-1) },
+  { key = 'DownArrow', mods = 'CMD', action = act.ScrollToPrompt(1) },
+  -- ⌘+⇧+↑, ⌘+⇧+↓ scroll by line -- 按行滚动
+  { key = 'UpArrow', mods = 'CMD|SHIFT', action = act.ScrollByLine(-1) },
+  { key = 'DownArrow', mods = 'CMD|SHIFT', action = act.ScrollByLine(1) },
+  -- ^+w clear pattern in search mode -- 搜索模式快速删除搜索词
+  { key = 'Backspace', mods = 'ALT', action = act.CopyMode 'ClearPattern' },
+  -- ^+⇧+h quick search hash -- 快速搜索 hash
+  { key = 'H', mods = 'CTRL|SHIFT', action = act.Search { Regex = '\\b[a-f0-9]{6,}\\b' }},
+  -- set ⌘+⇧+F to quick select mode (⌘+f search mode is default) -- 快速选择模式，按一些日常常用的模式（日期，URL等）快速选择复制
+  { key = 'F', mods = 'CMD|SHIFT', action = act.QuickSelect },
 }
 
 config.mouse_bindings = {
@@ -264,19 +254,19 @@ config.mouse_bindings = {
   {
     event = { Up = { streak = 1, button = "Left"} },
     mods = "NONE",
-    action = wezterm.action.DisableDefaultAssignment,
+    action = act.DisableDefaultAssignment,
   },
   -- Bind 'Up' event of CTRL-Click to open hyperlinks
   {
     event = { Up = { streak = 1, button = 'Left' } },
     mods = 'CMD',
-    action = wezterm.action.OpenLinkAtMouseCursor,
+    action = act.OpenLinkAtMouseCursor,
   },
   -- Disable the 'Down' event of CTRL-Click to avoid weird program behaviors
   {
     event = { Down = { streak = 1, button = 'Left' } },
     mods = 'CMD',
-    action = wezterm.action.Nop,
+    action = act.Nop,
   },
 }
 

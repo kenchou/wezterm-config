@@ -242,8 +242,11 @@ config.keys = {
   -- 特有功能
   -- ⇧+↑/⇧+↓ scrolling to the start of a Prompt zone
   -- 跳到上一个/下一个命令提示符
-  { key = 'UpArrow', mods = 'SHIFT', action = wezterm.action.ScrollToPrompt(-1) },
-  { key = 'DownArrow', mods = 'SHIFT', action = wezterm.action.ScrollToPrompt(1) },
+  { key = 'UpArrow', mods = 'CMD', action = wezterm.action.ScrollToPrompt(-1) },
+  { key = 'DownArrow', mods = 'CMD', action = wezterm.action.ScrollToPrompt(1) },
+  -- 按行滚动
+  { key = 'UpArrow', mods = 'CMD|SHIFT', action = wezterm.action.ScrollByLine(-1) },
+  { key = 'DownArrow', mods = 'CMD|SHIFT', action = wezterm.action.ScrollByLine(1) },
   -- ^+w clear pattern in search mode
   -- 搜索模式快速删除搜索词
   { key = 'Backspace', mods = 'ALT', action = wezterm.action.CopyMode 'ClearPattern' },

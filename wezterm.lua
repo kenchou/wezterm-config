@@ -143,6 +143,8 @@ config.macos_window_background_blur = 6
 -- disable title bar. 更美观的极简风
 config.window_decorations = "RESIZE|INTEGRATED_BUTTONS"
 
+-- config.tab_min_width = 20
+
 -- config.use_fancy_tab_bar = true
 -- config.show_new_tab_button_in_tab_bar = true
 config.enable_scroll_bar = true
@@ -165,13 +167,17 @@ config.colors = {
   compose_cursor = 'orange',
   -- The color of the scrollbar "thumb"; the portion that represents the current viewport
   scrollbar_thumb = scheme_def.foreground,
+  -- the foreground color of selected text
+  selection_fg = 'black',
+  -- the background color of selected text
+  selection_bg = '#fffacd',
   -- The color of the split lines between panes
   split = '#666666',
   tab_bar = {
     active_tab = {
       -- bg_color = scheme_def.background,
       -- fg_color = scheme_def.foreground,
-      bg_color = '#ffffff',
+      bg_color = '#cccccc',
       fg_color = '#000000',
     },
     -- The color of the inactive tab bar edge/divider
@@ -219,6 +225,7 @@ config.keys = {
   -- ⌘+k, ⌘+⇧+K clean scrollback -- 清屏
   { key = 'k', mods = 'CMD', action = act.ClearScrollback 'ScrollbackAndViewport' },
   { key = 'K', mods = 'CMD|SHIFT', action = act.ClearScrollback 'ScrollbackOnly' },
+  { key = 'r', mods = 'CMD', action = act.ResetTerminal },
   -- ⌘+w close current pane -- 关闭窗格
   { key = 'w', mods = 'CMD', action = act.CloseCurrentPane { confirm = true }},
   -- ⌘+d, ⌘+⇧+D split pane -- 水平/垂直分割窗格
@@ -246,6 +253,13 @@ config.keys = {
   { key = 'H', mods = 'CTRL|SHIFT', action = act.Search { Regex = '\\b[a-f0-9]{6,}\\b' }},
   -- set ⌘+⇧+F to quick select mode (⌘+f search mode is default) -- 快速选择模式，按一些日常常用的模式（日期，URL等）快速选择复制
   { key = 'F', mods = 'CMD|SHIFT', action = act.QuickSelect },
+  -- 禁用默认的 ctrl+_ (减小字体)，因为 nano 中是跳转到行
+  { key = '-', mods = 'CTRL', action = wezterm.action.DisableDefaultAssignment },
+  -- { key = '-', mods = 'CTRL|SHIFT', action = wezterm.action.DisableDefaultAssignment },
+  -- { key = '_', mods = 'CTRL', action = wezterm.action.DisableDefaultAssignment },
+  { key = '_', mods = 'CTRL|SHIFT', action = wezterm.action.DisableDefaultAssignment },
+  -- { key = 'b', mods = 'CTRL', action = act.RotatePanes 'CounterClockwise' },
+  { key = 'n', mods = 'CTRL', action = act.RotatePanes 'Clockwise' },
 }
 
 config.mouse_bindings = {
@@ -267,6 +281,47 @@ config.mouse_bindings = {
     event = { Down = { streak = 1, button = 'Left' } },
     mods = 'CMD',
     action = act.Nop,
+  },
+}
+
+-- -- Use the defaults as a base
+-- config.hyperlink_rules = wezterm.default_hyperlink_rules()
+config.hyperlink_rules = {
+  -- Matches: a URL in parens: (URL)
+  -- Markdown: [text](URL title)
+  {
+    regex = '\\((\\w+://\\S+?)(?:\\s+.+)?\\)',
+    format = '$1',
+    highlight = 1,
+  },
+  -- Matches: a URL in brackets: [URL]
+  {
+    regex = '\\[(\\w+://\\S+?)\\]',
+    format = '$1',
+    highlight = 1,
+  },
+  -- Matches: a URL in curly braces: {URL}
+  {
+    regex = '\\{(\\w+://\\S+?)\\}',
+    format = '$1',
+    highlight = 1,
+  },
+  -- Matches: a URL in angle brackets: <URL>
+  {
+    regex = '<(\\w+://\\S+?)>',
+    format = '$1',
+    highlight = 1,
+  },
+  -- Then handle URLs not wrapped in brackets
+  -- regex = '\\b\\w+://\\S+[)/a-zA-Z0-9-]+',
+  {
+    regex = '(?<![\\(\\{\\[<])\\b\\w+://\\S+',
+    format = '$0',
+  },
+  -- implicit mailto link
+  {
+    regex = '\\b\\w+@[\\w-]+(\\.[\\w-]+)+\\b',
+    format = 'mailto:$0',
   },
 }
 

@@ -126,6 +126,25 @@ wezterm.on('update-right-status', function(window, pane)
 end)
 
 
+local function copy_all(win, pane)
+  -- copy all text in a pane (except for bottom prompt in Xonsh)
+  local prompt_bottom_offset = 0
+  local proc = pane:get_foreground_process_info()
+  local name, binpath, arg = proc.name,proc.executable,proc.argv
+  local isXonsh = sh.isXonsh(arg)
+  if isXonsh then
+    if os.getenv("BOTTOM_TOOLBAR") then
+      prompt_bottom_offset = 2 -- exclude the main + bottom prompts
+    else
+      prompt_bottom_offset = 1 -- exclude the main          prompt
+  end end
+
+  local dims = pane:get_dimensions()
+  local txt  = pane:get_text_from_region(0, dims.scrollback_top, 0, dims.scrollback_top + dims.scrollback_rows - prompt_bottom_offset)
+  win:copy_to_clipboard(txt:match('^%s*(.-)%s*$')) -- trim leading and trailing whitespace
+end
+
+
 -- wezterm.on('gui-startup', function()
 --  local tab, pane, window = wezterm.mux.spawn_window({})
 --  window:gui_window():maximize()
@@ -197,7 +216,7 @@ config.window_frame = {
 }
 
 -- Fonts
--- config.font_size = 12
+config.font_size = 14
 config.font = wezterm.font_with_fallback {
   'SauceCodePro Nerd Font',
   'Noto Sans CJK SC',
@@ -260,6 +279,7 @@ config.keys = {
   { key = '_', mods = 'CTRL|SHIFT', action = wezterm.action.DisableDefaultAssignment },
   -- { key = 'b', mods = 'CTRL', action = act.RotatePanes 'CounterClockwise' },
   { key = 'n', mods = 'CTRL', action = act.RotatePanes 'Clockwise' },
+  { key = 'C', mods = 'CMD', action = wezterm.action_callback(copy_all) },
 }
 
 config.mouse_bindings = {

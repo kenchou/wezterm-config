@@ -259,6 +259,14 @@ config.keys = {
   { key = 'PageUp', mods = 'CMD', action = act.ScrollByPage(-1) },
   { key = 'PageDown', mods = 'CMD', action = act.ScrollByPage(1) },
   -- End of iTerm2 keys map
+  -- MacOS 习惯
+  { mods = "CMD|ALT", key = "LeftArrow", action = act.ActivateTabRelative(-1) },
+  { mods = "CMD|ALT", key = "RightArrow", action = act.ActivateTabRelative(1) },
+  { mods = "CMD|SHIFT", key = "LeftArrow", action = act.ActivateTabRelative(-1) },
+  { mods = "CMD|SHIFT", key = "RightArrow", action = act.ActivateTabRelative(1) },
+  { mods = "CMD|CTRL|SHIFT", key = "LeftArrow", action = act.MoveTabRelative(-1) },
+  { mods = "CMD|CTRL|SHIFT", key = "RightArrow", action = act.MoveTabRelative(1) },
+
   -- Feature of wezterm -- 特有功能
   -- ⇧+↑/⇧+↓ scrolling to the start of a Prompt zone -- 跳到上一个/下一个命令提示符
   { key = 'UpArrow', mods = 'CMD', action = act.ScrollToPrompt(-1) },

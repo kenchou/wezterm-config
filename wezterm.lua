@@ -32,15 +32,12 @@ end
 local process_icons = {
   -- shell
   ['bash'] = wezterm.nerdfonts.cod_terminal_bash,
-  ['fish'] = wezterm.nerdfonts.md_fish,
-  ['pwsh'] = wezterm.nerdfonts.seti_powershell,
-  ['zsh'] = wezterm.nerdfonts.dev_terminal,
+  ['fish'] = wezterm.nerdfonts.fa_fish,
+  ['pwsh'] = wezterm.nerdfonts.cod_terminal_powershell,
+  ['zsh'] = wezterm.nerdfonts.cod_terminal,
 
   -- 常用命令行工具
   ['bat'] = wezterm.nerdfonts.md_bat,
-  ['btm'] = wezterm.nerdfonts.md_chart_donut_variant,
-  ['btop'] = wezterm.nerdfonts.md_monitor_dashboard,
-  ['htop'] = wezterm.nerdfonts.md_chart_donut_variant,
   ['mprocs'] = wezterm.nerdfonts.cod_multiple_windows,
   ['nvim'] = wezterm.nerdfonts.custom_vim,
   ['sudo'] = wezterm.nerdfonts.fa_hashtag,
@@ -49,8 +46,13 @@ local process_icons = {
   ['wezterm'] = wezterm.nerdfonts.cod_terminal,
   ['wezterm-gui'] = wezterm.nerdfonts.cod_terminal,
   ['wget'] = wezterm.nerdfonts.md_download_box,
-
-  -- 网络工具
+  -- 常用命令行工具: top
+  ['bandwhich'] = wezterm.nerdfonts.md_monitor_dashboard,
+  ['btm'] = wezterm.nerdfonts.md_chart_donut_variant,
+  ['bottom'] = wezterm.nerdfonts.md_chart_donut_variant,
+  ['btop'] = wezterm.nerdfonts.md_monitor_dashboard,
+  ['htop'] = wezterm.nerdfonts.md_chart_donut_variant,
+  -- 常用命令行工具: 网络工具
   ['aria2c'] = wezterm.nerdfonts.fa_angle_double_down,
   ['curl'] = wezterm.nerdfonts.md_download,
   ['http'] = wezterm.nerdfonts.cod_arrow_swap,
@@ -86,19 +88,24 @@ local process_icons = {
   ['java'] = wezterm.nerdfonts.dev_java,
   ['lua'] = wezterm.nerdfonts.dev_lua,
   ['make'] = wezterm.nerdfonts.dev_cmake,
+  ['mise'] = wezterm.nerdfonts.cod_server_environment,
   ['node'] = wezterm.nerdfonts.dev_nodejs,
   ['npm'] = wezterm.nerdfonts.dev_npm,
   ['php'] = wezterm.nerdfonts.dev_php,
   ['python'] = wezterm.nerdfonts.dev_python,
   ['ruby'] = wezterm.nerdfonts.dev_ruby,
+
+  -- 模拟器
+  ['emulator'] = wezterm.nerdfonts.dev_android,
 }
 
 local function get_process_icon(tab)
   local process_name = tab.active_pane.foreground_process_name
+  -- print("----DEBUG---:foreground_process_name", process_name)
   process_name = process_name:match("([^/\\]+)%.exe$") or process_name:match("([^/\\]+)$") or process_name
+  -- print("----DEBUG---:process_name:basename", process_name)
   process_name = process_name:match("(python)[%d%.]*$") or process_name
   local icon = process_icons[process_name] or wezterm.nerdfonts.seti_checkbox_unchecked
-
   return icon
 end
 

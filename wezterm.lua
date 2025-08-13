@@ -37,7 +37,6 @@ local process_icons = {
   ['zsh']  = wezterm.nerdfonts.cod_terminal,
 
   -- 常用命令行工具
-  ['aichat']  = wezterm.nerdfonts.fa_lightbulb,
   ['awk']     = wezterm.nerdfonts.dev_awk,
   ['bat']     = wezterm.nerdfonts.md_bat,
   ['bitwise'] = wezterm.nerdfonts.cod_file_binary,
@@ -45,7 +44,9 @@ local process_icons = {
   ['fd']      = wezterm.nerdfonts.md_file_find_outline,
   ['fzf']     = wezterm.nerdfonts.cod_search_fuzzy,
   ['kalker']  = wezterm.nerdfonts.cod_symbol_operator,
+  ['mcfly']   = wezterm.nerdfonts.fa_history,
   ['mprocs']  = wezterm.nerdfonts.cod_multiple_windows,
+  ['parallel'] = wezterm.nerdfonts.cod_multiple_windows,
   ['rg']      = wezterm.nerdfonts.cod_search_fuzzy,
   ['sudo']    = wezterm.nerdfonts.fa_hashtag,
   ['tmux']    = wezterm.nerdfonts.cod_terminal_tmux,
@@ -62,12 +63,17 @@ local process_icons = {
   ['gping']  = wezterm.nerdfonts.md_lan_pending,
   ['http']   = wezterm.nerdfonts.cod_arrow_swap,
   ['https']  = wezterm.nerdfonts.cod_arrow_swap,
+  ['nmap']   = wezterm.nerdfonts.md_ip_network_outline,
   ['ping']   = wezterm.nerdfonts.md_lan_pending,
   ['ping6']  = wezterm.nerdfonts.md_lan_pending,
   ['ssh']    = wezterm.nerdfonts.md_remote_desktop,
   ['wget']   = wezterm.nerdfonts.md_download_box,
   ['wget2']  = wezterm.nerdfonts.md_download_box,
   ['xh']     = wezterm.nerdfonts.cod_arrow_swap,
+  -- 常用命令行工具: AI
+  ['aichat']  = wezterm.nerdfonts.fa_lightbulb,
+  ['lumen']   = wezterm.nerdfonts.fa_lightbulb,
+  ['ollama']  = wezterm.nerdfonts.fa_lightbulb,
 
   -- 文本编辑器
   ['nvim'] = wezterm.nerdfonts.custom_vim,
@@ -80,6 +86,7 @@ local process_icons = {
   ['lima']           = wezterm.nerdfonts.fa_linux,
   ['limactl']        = wezterm.nerdfonts.fa_linux,
   ['k9s']            = wezterm.nerdfonts.dev_kubernetes,
+  ['kdash']          = wezterm.nerdfonts.dev_kubernetes,
   ['kuberlr']        = wezterm.nerdfonts.dev_kubernetes,
   ['kubectl']        = wezterm.nerdfonts.dev_kubernetes,
   ['oxker']          = wezterm.nerdfonts.linux_docker,
@@ -98,6 +105,7 @@ local process_icons = {
   ['just']   = wezterm.nerdfonts.md_rocket_launch_outline,
   ['make']   = wezterm.nerdfonts.dev_cmake,
   ['mise']   = wezterm.nerdfonts.cod_versions,
+  ['hyperfine'] = wezterm.nerdfonts.md_speedometer,
   -- c#/dotnet
   ['dotnet'] = wezterm.nerdfonts.dev_dotnetcore,
   -- golang

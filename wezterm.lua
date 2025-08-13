@@ -85,25 +85,23 @@ local process_icons = {
   ['gh'] = wezterm.nerdfonts.dev_github_badge,
   ['git'] = wezterm.nerdfonts.dev_git,
   ['go'] = wezterm.nerdfonts.dev_go,
-  ['java'] = wezterm.nerdfonts.dev_java,
+  ['java'] = wezterm.nerdfonts.fae_java,
   ['lua'] = wezterm.nerdfonts.dev_lua,
   ['make'] = wezterm.nerdfonts.dev_cmake,
   ['mise'] = wezterm.nerdfonts.cod_server_environment,
   ['node'] = wezterm.nerdfonts.dev_nodejs,
-  ['npm'] = wezterm.nerdfonts.dev_npm,
-  ['php'] = wezterm.nerdfonts.dev_php,
-  ['python'] = wezterm.nerdfonts.dev_python,
-  ['ruby'] = wezterm.nerdfonts.dev_ruby,
+  ['npm'] = wezterm.nerdfonts.fa_npm,
+  ['php'] = wezterm.nerdfonts.fa_php,
+  ['python'] = wezterm.nerdfonts.fae_python,
+  ['ruby'] = wezterm.nerdfonts.fae_ruby_o,
 
   -- 模拟器
   ['emulator'] = wezterm.nerdfonts.dev_android,
 }
 
 local function get_process_icon(tab)
-  local process_name = tab.active_pane.foreground_process_name
-  -- print("----DEBUG---:foreground_process_name", process_name)
+  local process_name = tab.active_pane.foreground_process_name:lower()
   process_name = process_name:match("([^/\\]+)%.exe$") or process_name:match("([^/\\]+)$") or process_name
-  -- print("----DEBUG---:process_name:basename", process_name)
   process_name = process_name:match("(python)[%d%.]*$") or process_name
   local icon = process_icons[process_name] or wezterm.nerdfonts.seti_checkbox_unchecked
   return icon

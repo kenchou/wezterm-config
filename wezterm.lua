@@ -93,21 +93,28 @@ local process_icons = {
   ['sqlite3']   = wezterm.nerdfonts.dev_sqlite,
 
   -- 开发编译
-  ['cargo']  = wezterm.nerdfonts.dev_rust,
-  ['dotnet'] = wezterm.nerdfonts.dev_dotnetcore,
   ['gh']     = wezterm.nerdfonts.dev_github_badge,
   ['git']    = wezterm.nerdfonts.dev_git,
-  ['go']     = wezterm.nerdfonts.dev_go,
-  ['java']   = wezterm.nerdfonts.fae_java,
   ['just']   = wezterm.nerdfonts.md_rocket_launch_outline,
-  ['lua']    = wezterm.nerdfonts.dev_lua,
   ['make']   = wezterm.nerdfonts.dev_cmake,
   ['mise']   = wezterm.nerdfonts.cod_versions,
+  -- c#/dotnet
+  ['dotnet'] = wezterm.nerdfonts.dev_dotnetcore,
+  -- golang
+  ['go']     = wezterm.nerdfonts.dev_go,
+  -- java
+  ['java']   = wezterm.nerdfonts.fae_java,
+  -- nodejs
   ['node']   = wezterm.nerdfonts.dev_nodejs,
   ['npm']    = wezterm.nerdfonts.fa_npm,
+  -- scripts
+  ['lua']    = wezterm.nerdfonts.dev_lua,
   ['php']    = wezterm.nerdfonts.fa_php,
   ['python'] = wezterm.nerdfonts.fae_python,
   ['ruby']   = wezterm.nerdfonts.fae_ruby_o,
+  -- rust
+  ['cargo']  = wezterm.nerdfonts.dev_rust,
+  ['rustup'] = wezterm.nerdfonts.dev_rust,
 
   -- 模拟器/调试器
   ['adb']      = wezterm.nerdfonts.cod_debug_console,

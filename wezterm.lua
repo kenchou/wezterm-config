@@ -47,9 +47,14 @@ local process_icons = {
   ['mcfly']    = wezterm.nerdfonts.fa_history,
   ['mprocs']   = wezterm.nerdfonts.cod_multiple_windows,
   ['parallel'] = wezterm.nerdfonts.cod_multiple_windows,
+  ['procs']    = wezterm.nerdfonts.cod_server_process,
+  ['qsv']      = wezterm.nerdfonts.fa_file_csv,
+  ['ripgrep']  = wezterm.nerdfonts.cod_search_fuzzy,
   ['rg']       = wezterm.nerdfonts.cod_search_fuzzy,
+  ['rsync']    = wezterm.nerdfonts.oct_sync,
   ['sudo']     = wezterm.nerdfonts.fa_hashtag,
   ['tmux']     = wezterm.nerdfonts.cod_terminal_tmux,
+  ['viu']      = wezterm.nerdfonts.fa_picture_o,
   ['yazi']     = wezterm.nerdfonts.md_duck,
   -- 常用命令行工具: 系统资源
   ['btop']      = wezterm.nerdfonts.fa_pie_chart,
@@ -66,6 +71,7 @@ local process_icons = {
   ['nmap']   = wezterm.nerdfonts.md_ip_network_outline,
   ['ping']   = wezterm.nerdfonts.md_lan_pending,
   ['ping6']  = wezterm.nerdfonts.md_lan_pending,
+  ['rustscan'] = wezterm.nerdfonts.md_ip_network_outline,
   ['ssh']    = wezterm.nerdfonts.md_remote_desktop,
   ['wget']   = wezterm.nerdfonts.md_download_box,
   ['wget2']  = wezterm.nerdfonts.md_download_box,
@@ -102,6 +108,8 @@ local process_icons = {
   -- 开发编译
   ['gh']     = wezterm.nerdfonts.dev_github_badge,
   ['git']    = wezterm.nerdfonts.dev_git,
+  ['tig']    = wezterm.nerdfonts.dev_git,
+  --
   ['just']   = wezterm.nerdfonts.md_rocket_launch_outline,
   ['make']   = wezterm.nerdfonts.dev_cmake,
   ['mise']   = wezterm.nerdfonts.cod_versions,
@@ -133,7 +141,7 @@ local function get_process_icon(tab)
   local process_name = tab.active_pane.foreground_process_name:lower()
   process_name = process_name:match("([^/\\]+)%.exe$") or process_name:match("([^/\\]+)$") or process_name
   process_name = process_name:match("(python)[%d%.]*$") or process_name
-  local icon = process_icons[process_name] or wezterm.nerdfonts.seti_checkbox_unchecked
+  local icon = process_icons[process_name] or wezterm.nerdfonts.fa_terminal
   return icon
 end
 

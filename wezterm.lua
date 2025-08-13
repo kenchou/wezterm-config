@@ -53,6 +53,7 @@ local process_icons = {
   ['kuberlr'] = wezterm.nerdfonts.linux_docker,
   ['kubectl'] = wezterm.nerdfonts.linux_docker,
   ['make'] = wezterm.nerdfonts.seti_makefile,
+  ['mprocs'] = wezterm.nerdfonts.cod_multiple_windows,
   ['mycli'] = wezterm.nerdfonts.dev_mysql,
   ['mysql'] = wezterm.nerdfonts.dev_mysql,
   ['node'] = wezterm.nerdfonts.dev_nodejs_small,
@@ -239,6 +240,8 @@ config.inactive_pane_hsb = {
 --   on macOS the Option key (⌥),
 --   on other systems the Alt or Meta key.
 local act = wezterm.action
+-- workaround: mprocs 无法使用 ctrl-* 问题, 见 https://github.com/pvolok/mprocs/issues/165
+config.enable_csi_u_key_encoding = true
 config.keys = {
   -- Configure the same hotkeys as in iTerm2. -- 模拟 iTerm2 的按键
   -- ⌘+k, ⌘+⇧+K clean scrollback -- 清屏

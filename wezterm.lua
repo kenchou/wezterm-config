@@ -82,7 +82,7 @@ local process_icons = {
   ['ollama']  = wezterm.nerdfonts.fa_lightbulb,
 
   -- 文本编辑器
-  ['nvim'] = wezterm.nerdfonts.custom_vim,
+  ['nvim'] = wezterm.nerdfonts.dev_neovim,
   ['vim']  = wezterm.nerdfonts.dev_vim,
 
   -- 容器

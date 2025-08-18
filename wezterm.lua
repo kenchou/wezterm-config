@@ -72,6 +72,7 @@ local process_icons = {
   ['ping6']    = wezterm.nerdfonts.md_lan_pending,
   ['rsync']    = wezterm.nerdfonts.oct_sync,
   ['rustscan'] = wezterm.nerdfonts.md_ip_network_outline,
+  ['somo']     = wezterm.nerdfonts.md_ip_network_outline,
   ['ssh']      = wezterm.nerdfonts.md_remote_desktop,
   ['wget']     = wezterm.nerdfonts.md_download_box,
   ['wget2']    = wezterm.nerdfonts.md_download_box,

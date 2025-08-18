@@ -163,10 +163,10 @@ wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_wid
     end
   end
 
-  local process = get_process_icon(tab)
+  local icon = get_process_icon(tab)
   local zoom_icon = is_zoomed and wezterm.nerdfonts.cod_zoom_in or "⌘" .. (tab.tab_index + 1)
   local tab_title = pad_title(tab_title(tab), 20)
-  local title = string.format('%s  %s %s', process, tab_title, zoom_icon) -- Add placeholder for zoom_icon
+  local title = string.format('%s %s %s', icon, tab_title, zoom_icon) -- Add placeholder for zoom_icon
 
   return wezterm.format({
     { Attribute = { Intensity = 'Bold' } },

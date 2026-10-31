@@ -301,6 +301,8 @@ local act = wezterm.action
 config.enable_csi_u_key_encoding = true
 config.keys = {
   -- Configure the same hotkeys as in iTerm2. -- 模拟 iTerm2 的按键
+  -- ⌘+s 左手输入回车
+  { key = 'e', mods = 'CMD', action = act.SendKey { key = 'Enter' } },
   -- ⌘+k, ⌘+⇧+K clean scrollback -- 清屏
   { key = 'k', mods = 'CMD', action = act.ClearScrollback 'ScrollbackAndViewport' },
   { key = 'K', mods = 'CMD|SHIFT', action = act.ClearScrollback 'ScrollbackOnly' },

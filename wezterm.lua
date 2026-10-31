@@ -380,6 +380,10 @@ config.hyperlink_rules = {
   -- Matches: a URL in parens: (URL)
   -- Markdown: [text](URL title)
   {
+    regex = [[\b\w+://(?:[^\s()<>"'`]|\((?:[^\s()<>]|\([^\s()<>]*\))*\))*(?:[\w/#=&%~+-]|\((?:[^\s()<>]|\([^\s()<>]*\))*\))]],
+    format = '$0',
+  },
+  {
     regex = '\\((\\w+://\\S+?)(?:\\s+.+)?\\)',
     format = '$1',
     highlight = 1,
